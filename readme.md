@@ -2,16 +2,26 @@
 
 Blackbaud - Off the Grid Summer '14
 
+### How to run!
+1. bundle install
+2. rake db:migrate
+3. rails server
+4. navigate to localhost:3000
+5. enjoy!
+
 
 ### API
 
-Suggestion:
-	- Location location
-	- Time(String)	time
-	- Number votes
+    Suggestion:
+	
+	- string location
+	- string depature time
+	- integer votes
 
-Location:
+-----
+    
+    User:
+	
 	- String name
 
-User:
-	- String name
+
