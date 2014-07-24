@@ -1,8 +1,0 @@
-<Alloy>
-	<Window id="addWin" title="Add User" class="container" modal="true" onOpen="focusTextField">
-  	<TextField id="firstNameField" hintText="First name?" />
-  	<TextField id="lastNameField" hintText="Last name?" onReturn="closeKeyboard"/>
-  	<Button class="button" onClick="addUser">Login</Button>
-  	<Button class="button" onClick="closeWindow">Cancel</Button>
-	</Window>
-</Alloy>

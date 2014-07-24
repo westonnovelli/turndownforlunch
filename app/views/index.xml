@@ -1,5 +1,0 @@
-<Alloy>
-	<Window class="container">
-		<Button id="label" onClick="login">Login</Button>
-	</Window>
-</Alloy>
