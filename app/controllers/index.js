@@ -1,5 +1,5 @@
-function doClick(e) {
-    alert($.label.text);
-}
-
 $.index.open();
+
+function login() {
+	Alloy.createController("user").getView().open();
+}
