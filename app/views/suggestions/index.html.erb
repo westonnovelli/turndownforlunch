@@ -24,7 +24,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover" id="myTable">
                                     <thead>
                                         <tr>
                                             <th>Rendering engine</th>
@@ -99,4 +99,10 @@
 							
 							
 </div>
+
+<script>
+$(document).ready(function(){
+    $('#myTable').dataTable();
+});
+</script>
                             
