@@ -20,4 +20,17 @@ class Users < ActiveRecord::Base
 		# TODO should we have some other default value, or just handle the null
 		save
 	end
+
+  # Finds and returns user if exists; makes user otherwise
+	def self.findUser(firstName, lastName)
+		fullName = "#{firstName} #{lastName}"
+		user = find_by_name(fullName)
+		if user
+			user
+		else
+			@user = Users.new(name: fullName)
+			@user.save
+		  user = find_by_name(fullName)
+		end
+	end
 end
