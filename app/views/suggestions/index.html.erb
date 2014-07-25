@@ -1,8 +1,8 @@
 <div id="page-wrapper">
   <div class="row">
     <div class="col-lg-12">
-    <%= bootstrap_flash %>
-      <h1 class="page-header">Tables</h1>
+      <%= bootstrap_flash %>
+      <h1 class="page-header">TuRn DoWn FoR lUnCh</h1>
     </div>
     <!-- /.col-lg-12 -->
   </div>
@@ -31,8 +31,11 @@
                   <td><%= suggestion.departure_time %></td>
                   <td>
                     <a class="popoverData" class="btn" href="#" data-template='<div class="popover" role="tooltip"><h3 class="popover-title"></h3><div class="popover-content"></div></div>' style="white-space:pre-wrap;" data-content= "James Bond \n Jonathan Miles" rel="popover" data-placement="right" data-original-title="People That Voted" data-trigger="hover"><%= suggestion.votes %></a>
-                    <%= link_to vote_up_suggestion_path(suggestion), :class => "btn btn-mini btn-primary", :title => "Vote" do %>
-                      <i class="glyphicon glyphicon-thumbs-up"></i>
+                    <% if current_user %>
+                      <%= link_to vote_up_suggestion_path(suggestion), :class => "btn btn-mini btn-primary", :title => "Vote" do %>
+                        <i class="glyphicon glyphicon-thumbs-up"></i>
+                      <% end %>
+                    <% else %>
                     <% end %>
                   </td>
                 </tr>
