@@ -1,9 +1,16 @@
 Turndownforlunch::Application.routes.draw do
+  get "users/index"
   get "suggestions/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   resource :suggestions
+
+  resource :users do
+    member do
+      get 'suggestion'
+    end
+  end
 
   # You can have the root of your site routed with "root"
   root 'suggestions#index'

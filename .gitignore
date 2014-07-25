@@ -19,3 +19,5 @@
 
 # Vim temporary files
 *.swp
+
+.idea/
