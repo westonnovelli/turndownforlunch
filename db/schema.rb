@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724231348) do
+ActiveRecord::Schema.define(version: 20140725005545) do
 
   create_table "suggestions", force: true do |t|
     t.string   "location",       default: "", null: false
@@ -24,9 +24,10 @@ ActiveRecord::Schema.define(version: 20140724231348) do
   add_index "suggestions", ["location", "departure_time"], name: "index_suggestions_by_location_and_departure_time", unique: true
 
   create_table "users", force: true do |t|
-    t.string   "name",       default: "", null: false
+    t.string   "name",          default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "suggestion_id"
   end
 
   add_index "users", ["name"], name: "index_user_by_name", unique: true
