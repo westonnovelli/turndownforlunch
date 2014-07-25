@@ -28,14 +28,14 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-    		  <li><p class="navbar-text"><a href="/suggestions/new " class="navbar-link"> Add Suggestion </a></p></li>
+    		  <li><p class="navbar-text"><a href="/suggestions/new" class="navbar-link"> Add Suggestion </a></p></li>
           <li>
             <div>
               <% if current_user %>
                 <p class="navbar-text">Signed in as <%= current_user %></p>
-                <%= link_to "Logout", "logout", :class => "btn btn-default navbar-btn" %>
+                <%= link_to "Logout", logout_path, :class => "btn btn-default navbar-btn" %>
               <% else %>
-                <%= link_to "Login", "login", :class => "btn btn-default navbar-btn" %>
+                <%= link_to "Login", login_path, :class => "btn btn-default navbar-btn" %>
               <% end %>
             </div>
           </li>
