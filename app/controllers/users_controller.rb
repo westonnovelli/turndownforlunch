@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def undo_suggestion
   	@user.make_suggestion
-  end 
+  end
 
   private
   def set_user

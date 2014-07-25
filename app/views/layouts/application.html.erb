@@ -6,8 +6,8 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <link href="//cdn.datatables.net/1.10.1/css/jquery.dataTables.css" rel="stylesheet">
-  
-  
+
+
 </head>
 <body>
 
@@ -22,20 +22,23 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-		
+
         <%= link_to "Turn Down For Lunch", root_path, :class => "navbar-brand" %>
       </div><!-- .navbar-header -->
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-		
-		
-		  <li><p class="navbar-text"><a href="/suggestions/new " class="navbar-link"> Add Suggestion </a></p></li>
-		  
-		  
-		  
-          <li><p class="navbar-text">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p></li>
-          <li><button type="button" class="btn btn-default navbar-btn navbar-right">Sign in</button></li>
+    		  <li><p class="navbar-text"><a href="/suggestions/new " class="navbar-link"> Add Suggestion </a></p></li>
+          <li>
+            <div>
+              <% if current_user %>
+                <p class="navbar-text">Signed in as <%= current_user %></p>
+                <%= link_to "Logout", "logout", :class => "btn btn-default navbar-btn" %>
+              <% else %>
+                <%= link_to "Login", "login", :class => "btn btn-default navbar-btn" %>
+              <% end %>
+            </div>
+          </li>
         </ul>
       </div><!-- .navbar-collapse -->
 

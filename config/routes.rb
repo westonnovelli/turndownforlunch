@@ -1,10 +1,13 @@
 Turndownforlunch::Application.routes.draw do
+  get "sessions/new"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  get "login" => "users#index"
+  get "login" => "sessions#new", :as => "login"
+  get "logout" => "sessions#destroy", :as => "logout"
 
   resources :suggestions
+  resources :sessions
 
   resources :users do
     member do
