@@ -1,12 +1,12 @@
 Turndownforlunch::Application.routes.draw do
-  get "users/index"
-  get "suggestions/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resource :suggestions
+  get "login" => "users#index"
 
-  resource :users do
+  resources :suggestions
+
+  resources :users do
     member do
       get 'suggestion'
       post 'make_suggestion'
@@ -51,7 +51,7 @@ Turndownforlunch::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
