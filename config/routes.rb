@@ -9,6 +9,8 @@ Turndownforlunch::Application.routes.draw do
   resource :users do
     member do
       get 'suggestion'
+      post 'make_suggestion'
+      post 'undo_suggestion'
     end
   end
 
