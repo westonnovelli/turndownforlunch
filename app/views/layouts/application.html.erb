@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Turndownforlunch</title>
+  <title>Turn Down For Lunch</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -54,7 +54,8 @@
     </div><!-- .container-fluid -->
   </nav>
 <div class="container">
-<%= yield %>
+  <%= render 'layouts/messages' %>
+  <%= yield %>
 </div>
 <script src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.js"></script>
 </body>
