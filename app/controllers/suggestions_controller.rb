@@ -1,5 +1,5 @@
 class SuggestionsController < ApplicationController
-    before_action :set_suggestion, only: [:show, :edit, :update, :destroy, :refresh, :start, :stop]
+    before_action :set_suggestion, only: [:show, :edit, :update, :destroy, :vote_up]
 
     def index
       @suggestions = Suggestion.all
@@ -54,11 +54,20 @@ class SuggestionsController < ApplicationController
 
     def vote_up
       @suggestion.vote_up
+      respond_to do |format|
+        if @suggestion.save
+          format.html { redirect_to suggestions_url, notice: 'Vote successful!' }
+          format.json { render action: 'show', status: created, location: @suggestion }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @suggestion.errors, status: :unprocessable_entity }
+        end
+      end
     end
 
     private
     def set_suggestion
-      @suggestion = suggestion.find(params[:id])
+      @suggestion = Suggestion.find(params[:id])
     end
 
     def suggestion_params

@@ -5,7 +5,13 @@ Turndownforlunch::Application.routes.draw do
   get "login" => "sessions#new"
   get "logout" => "sessions#destroy"
 
-  resources :suggestions
+
+  resources :suggestions do
+    member do
+      get 'vote_up'
+    end
+  end
+  
   resources :sessions
 
   resources :users do
