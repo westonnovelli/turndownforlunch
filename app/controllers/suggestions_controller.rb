@@ -23,7 +23,7 @@ class SuggestionsController < ApplicationController
 
       respond_to do |format|
         if @suggestion.save
-          format.html { redirect_to suggestions_url, notice: 'suggestion was successfully created.' }
+          format.html { redirect_to suggestions_url, notice: 'Suggestion was successfully created!' }
           format.json { render action: 'show', status: created, location: @suggestion }
         else
           format.html { render action: 'new' }
@@ -35,7 +35,7 @@ class SuggestionsController < ApplicationController
     def update
       respond_to do |format|
         if @suggestion.update(suggestion_params)
-          format.html { redirect_to @suggestion, notice: 'suggestion was successfully updated.' }
+          format.html { redirect_to @suggestion, notice: 'Suggestion was successfully updated!' }
           format.json { head :no_content }
         else
           format.html { render action: 'edit' }
