@@ -62,6 +62,6 @@ class SuggestionsController < ApplicationController
     end
 
     def suggestion_params
-      #params.require(:suggestion).permit(:location, :departure_time)
+      params.require(:suggestion).permit(:location, :departure_time)
     end
 end
