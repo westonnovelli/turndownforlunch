@@ -22,6 +22,7 @@ Blackbaud - Off the Grid Summer '14
     
     User:
 	
-	- String name
+	- string name
+	- integer suggestion
 
 

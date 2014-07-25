@@ -21,7 +21,7 @@ class SuggestionsController < ApplicationController
       respond_to do |format|
         if @suggestion.save
           format.html { redirect_to @suggestion, notice: 'suggestion was successfully created.' }
-          format.json { render action: 'show', location: created, location: @suggestion }
+          format.json { render action: 'show', status: created, location: @suggestion }
         else
           format.html { render action: 'new' }
           format.json { render json: @suggestion.errors, status: :unprocessable_entity }
@@ -47,6 +47,10 @@ class SuggestionsController < ApplicationController
         format.html { redirect_to suggestions_url }
         format.json { head :no_content }
       end
+    end
+
+    def vote_up
+      @suggestion.vote_up
     end
 
     private
