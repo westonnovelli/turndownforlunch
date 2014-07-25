@@ -6,7 +6,7 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <link href="//cdn.datatables.net/1.10.1/css/jquery.dataTables.css" rel="stylesheet">
-  <link href = "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" >
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" >
 </head>
 <body>
 
@@ -26,18 +26,18 @@
       </div><!-- .navbar-header -->
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav">
     		  <li>
-            <% if current_user %>
-              <p class="navbar-text">
-                <%= link_to 'Add Suggestion', new_suggestion_path, :class =>"navbar-link" %>
-              </p>
-            <% else %>
-              <p class="navbar-text">
-                <%= link_to 'Add Suggestion', login_path, :class =>"navbar-link" %>
-              </p>
-            <% end %>
+            <div>
+              <% if current_user %>
+                  <%= link_to 'Add Suggestion', new_suggestion_path, :class =>"btn btn-default navbar-btn" %>
+              <% else %>
+                  <%= link_to 'Add Suggestion', login_path, :class =>"btn btn-default navbar-btn" %>
+              <% end %>
+            </div>
           </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
           <li>
             <div>
               <% if current_user %>

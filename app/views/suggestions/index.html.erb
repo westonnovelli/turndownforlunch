@@ -26,19 +26,19 @@
               </thead>
               <tbody>
                 <% @suggestions.each do |suggestion| %>
-                <tr class="odd gradeX">
-                  <td><%= suggestion.location %></td>
-                  <td><%= suggestion.departure_time %></td>
-                  <td>
-                    <a class="popoverData" class="btn" href="#" data-template='<div class="popover" role="tooltip"><h3 class="popover-title"></h3><div class="popover-content"></div></div>' style="white-space:pre-wrap;" data-content= "James Bond \n Jonathan Miles" rel="popover" data-placement="right" data-original-title="People That Voted" data-trigger="hover"><%= suggestion.votes %></a>
-                    <% if current_user %>
-                      <%= link_to vote_up_suggestion_path(suggestion), :class => "btn btn-mini btn-primary", :title => "Vote" do %>
-                        <i class="glyphicon glyphicon-thumbs-up"></i>
-                      <% end %>
-                    <% else %>
-                    <% end %>
-                  </td>
-                </tr>
+                  <tr class="odd gradeX">
+                    <td><%= suggestion.location %></td>
+                    <td><%= suggestion.departure_time %></td>
+                    <td>
+                        <a class="popoverData btn" href="#" data-template='<div class="popover" role="tooltip"><h3 class="popover-title"></h3><div class="popover-content"></div></div>' style="white-space:pre-wrap;" data-content= "James Bond \n Jonathan Miles" rel="popover" data-placement="right" data-original-title="People That Voted" data-trigger="hover"><%= suggestion.votes %></a>
+                        <% if current_user %>
+                          <%= link_to vote_up_suggestion_path(suggestion), :class => "btn btn-mini btn-primary navbar-right", :title => "Vote" do %>
+                            <i class="glyphicon glyphicon-thumbs-up"></i>
+                          <% end %>
+                        <% else %>
+                        <% end %>
+                    </td>
+                  </tr>
                 <% end %>
               </tbody>
             </table>
