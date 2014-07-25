@@ -28,7 +28,8 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-    		  <li><p class="navbar-text"><a href="/suggestions/new " class="navbar-link"> Add Suggestion </a></p></li>
+    		  <li><p class="navbar-text">
+          <%= link_to 'Add Suggestion', new_suggestion_path, :class =>"navbar-link" %></p></li>
           <li>
             <div>
               <% if current_user %>
