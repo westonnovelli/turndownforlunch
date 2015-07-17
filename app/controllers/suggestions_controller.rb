@@ -82,11 +82,7 @@ class SuggestionsController < ApplicationController
     end
 
     def vote_down
-      vote = Vote.where(:suggestion_id => @suggestion.id, :user_id => current_user.id)
-      unless vote.nil?
-        @suggestion.vote_down
-        Vote.destroy(vote[0].id)
-      end
+      current_user.down_vote(@suggestion)
       respond_to do |format|
         format.html {
           flash[:notice] = "Your vote has been removed."

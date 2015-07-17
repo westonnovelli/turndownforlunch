@@ -14,6 +14,14 @@ class Users < ActiveRecord::Base
     end
   end
 
+  def down_vote(suggestion)
+    vote = Vote.where(:suggestion_id => suggestion.id, :user_id => self.id)
+    unless vote.nil?
+      Vote.destroy(vote[0].id)
+      suggestion.vote_down
+    end
+  end
+
   # Finds and returns user if exists; makes user otherwise
 	def self.findUser(firstName, lastName)
 		fullName = "#{firstName} #{lastName}"
