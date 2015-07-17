@@ -1,0 +1,16 @@
+<table class="table table-striped table-bordered table-hover" id="myTable">
+  <thead>
+  <tr>
+    <th>User</th>
+    <th>Suggestion</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @votes.each do |vote| %>
+      <tr class="odd gradeX">
+        <td><%= vote.user_id %></td>
+        <td><%= vote.suggestion_id %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

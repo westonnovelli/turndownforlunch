@@ -9,6 +9,7 @@ Turndownforlunch::Application.routes.draw do
   resources :suggestions do
     member do
       get 'vote_up'
+      get 'vote_down'
     end
   end
   
@@ -19,6 +20,12 @@ Turndownforlunch::Application.routes.draw do
       get 'suggestion'
       post 'make_suggestion'
       post 'undo_suggestion'
+    end
+  end
+
+  resources :votes do
+    member do
+      get 'votes'
     end
   end
 

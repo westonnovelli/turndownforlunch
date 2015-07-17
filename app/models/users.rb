@@ -1,25 +1,18 @@
 class Users < ActiveRecord::Base
 
-	def suggestion
-		self.suggestion
-		logger.info "User #{:name}'s suggestion is #{self.suggestion}."
-		# TODO what happens when the suggestion is nil?
-	end
 
-	def make_suggestion(suggestion)
-		unless self.suggestion != nil
-			self.suggestion = suggestion
-			save
-		end
-		logger.info "User #{:name} tried to vote for more than one suggestion."
-	end
-
-	def undo_suggestion
-		logger.info "User #{:name} is undoing his/her vote."
-		self.suggestion = nil
-		# TODO should we have some other default value, or just handle the null
-		save
-	end
+  def up_vote(suggestion)
+    puts self.id
+    previous_vote = Vote.where(:suggestion_id => suggestion.id, :user_id => self.id)
+    return false, "You have already voted for this." unless previous_vote.empty?
+    vote = Vote.new(user_id: self.id, suggestion_id: suggestion.id)
+    if vote.save
+      suggestion.vote_up
+      return true, "Your vote has been recorded"
+    else
+      return false, "Internal error"
+    end
+  end
 
   # Finds and returns user if exists; makes user otherwise
 	def self.findUser(firstName, lastName)

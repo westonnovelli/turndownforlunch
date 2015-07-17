@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = Users.findUser(params[:firstName], params[:lastName])
+    user = Users.findUser(params[:firstName], params[:lastName]) if params[:firstName]+params[:lastName] != ""
     if user
       session[:user_id] = user.id
       redirect_to root_url, :notice => "Logged in!"

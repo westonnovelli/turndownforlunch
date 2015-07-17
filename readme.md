@@ -15,7 +15,7 @@ Blackbaud - Off the Grid Summer '14
     Suggestion:
 	
 	- string location
-	- string depature time
+	- string departure time
 	- integer votes
 
 -----

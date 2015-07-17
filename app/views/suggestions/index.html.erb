@@ -29,10 +29,18 @@
                     <td><%= suggestion.location %></td>
                     <td><%= suggestion.departure_time %></td>
                     <td>
-                        <a class="popoverData btn" href="#" data-template='<div class="popover" role="tooltip"><h3 class="popover-title"></h3><div class="popover-content"></div></div>' style="white-space:pre-wrap;" data-content= "James Bond \n Jonathan Miles" rel="popover" data-placement="right" data-original-title="People That Voted" data-trigger="hover"><%= suggestion.votes %></a>
+
+                        <a class="popoverData btn" href="#" data-template='<div class="popover" role="tooltip"><h3 class="popover-title"></h3>
+                        <div class="popover-content"></div></div>' style="white-space:pre-wrap;" data-html="true" data-content="<% @suggestion_votes[suggestion.id].each do |user| %>
+                        <%= "#{user.name} <br>" %><% end %>"  rel="popover" data-placement="right" data-original-title="People That Voted" data-trigger="hover"><%= suggestion.votes %></a>
                         <% if current_user %>
+                          <% if @up_votes_for_user.include? suggestion.id %>
+                              <%= link_to vote_down_suggestion_path(suggestion), :class => "btn btn-mini btn-warning navbar-right", :title => "Oops" do %>
+                                  <i class="glyphicon glyphicon-thumbs-down"></i>
+                              <% end %>
+                          <% end %>
                           <%= link_to vote_up_suggestion_path(suggestion), :class => "btn btn-mini btn-primary navbar-right", :title => "Vote" do %>
-                            <i class="glyphicon glyphicon-thumbs-up"></i>
+                              <i class="glyphicon glyphicon-thumbs-up"></i>
                           <% end %>
                         <% else %>
                         <% end %>
@@ -45,6 +53,8 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
 <script>
 $(document).ready(function(){
     $('#myTable').dataTable();
