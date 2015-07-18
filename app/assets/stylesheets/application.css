@@ -11,6 +11,7 @@
  *= require_self
  *= require bootstrap.min
  *= require_tree .
+ *= require bootstrap-datepicker
  */
 
 @font-face {
@@ -20,4 +21,8 @@
   url('../assets/glyphicons-halflings-regular.woff') format('woff'), 
   url('../assets/glyphicons-halflings-regular.ttf') format('truetype'), 
   url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+.nav-form {
+    display: inline;
 }

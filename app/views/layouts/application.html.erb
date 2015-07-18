@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Turn Down For Lunch</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -21,18 +22,33 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-
         <%= link_to "Turn Down For Lunch", root_path, :class => "navbar-brand" %>
       </div><!-- .navbar-header -->
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-    		  <li>
+          <li>
             <div>
               <% if current_user %>
                   <%= link_to 'Add Suggestion', new_suggestion_path, :class =>"btn btn-default navbar-btn" %>
               <% else %>
                   <%= link_to 'Add Suggestion', login_path, :class =>"btn btn-default navbar-btn" %>
+              <% end %>
+            </div>
+          </li>
+          <li>
+            <div class="nav-form">
+                <a href="/days/<%= @day.id %>/prev" class="btn navbar-btn day-select" role="button"><span class="glyphicon glyphicon-arrow-left"></span></a>
+            </div>
+          </li>
+          <li>
+            <div align="center">
+              <% unless @day.nil? %>
+                  <% if current_user %>
+                    <%= render 'days/form_subtile', locals: {day: @day}  %>
+                  <% else %>
+                    <%= render 'days/display', locals: {day: @day} %>
+                  <% end %>
               <% end %>
             </div>
           </li>
@@ -58,5 +74,19 @@
   <%= yield %>
 </div>
 <script src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+      date = $('.date');
+      date.datepicker({
+          format: "yyyy-mm-dd"
+      });
+      date.datepicker().on('changeDate', function(e) {
+                            console.log(e.date);
+                            console.log($('.selected-date').val());
+                            $('#goto-day').submit();
+                          });
+      date.datepicker('update', $('.current-date').data('date'));
+  });
+</script>
 </body>
 </html>

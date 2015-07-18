@@ -2,7 +2,8 @@ class SuggestionsController < ApplicationController
     before_action :set_suggestion, only: [:show, :edit, :update, :destroy, :vote_up, :vote_down]
 
     def index
-      @suggestions = Suggestion.all
+      set_day
+      @suggestions = Suggestion.where("day_id == #{@day.id}")
       @up_votes_for_user = []
       @suggestion_votes = Hash.new {|h, k| h[k] = []}
       Vote.all.each do |vote|
@@ -11,15 +12,13 @@ class SuggestionsController < ApplicationController
         end
         @suggestion_votes[vote.suggestion_id] << Users.find(vote.user_id)
       end
-      @suggestions.each do |suggestion|
-        puts "#{suggestion.location} #{@suggestion_votes[suggestion.id]}"
-      end
     end
 
     def show
     end
 
     def new
+      @day = current_day
       @suggestion = Suggestion.new
     end
 
@@ -29,7 +28,8 @@ class SuggestionsController < ApplicationController
     def create
       logger.info "creating suggestion"
       @suggestion = Suggestion.new(suggestion_params)
-      @suggestion.createSuggestion
+      @suggestion.day_id = current_day.id
+      @suggestion.create_suggestion
       @suggestion.reload
 
       respond_to do |format|
@@ -97,12 +97,15 @@ class SuggestionsController < ApplicationController
       @suggestion = Suggestion.find(params[:id])
     end
 
-    private
-    def set_user
-      @user = User.find(params[:user_id])
-    end
-
     def suggestion_params
       params.require(:suggestion).permit(:location, :departure_time)
+    end
+
+    def set_day
+      if current_user
+        @day = current_day
+      else
+        @day = Day.get_or_create(Date.today)
+      end
     end
 end

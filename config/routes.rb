@@ -1,4 +1,5 @@
 Turndownforlunch::Application.routes.draw do
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -15,19 +16,15 @@ Turndownforlunch::Application.routes.draw do
   
   resources :sessions
 
-  resources :users do
-    member do
-      get 'suggestion'
-      post 'make_suggestion'
-      post 'undo_suggestion'
-    end
-  end
+  resources :users
 
-  resources :votes do
-    member do
-      get 'votes'
-    end
-  end
+  get 'days/today'    => 'days#today', as: :today
+  get 'days/:id/prev' => 'days#prev',  as: :yesterday
+  get 'days/:id/next' => 'days#next',  as: :tomorrow
+  get 'days/goto'     => 'days#goto',  as: :goto
+  resources :days
+
+  resources :votes
 
   # You can have the root of your site routed with "root"
   root 'suggestions#index'

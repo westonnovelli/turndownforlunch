@@ -1,0 +1,6 @@
+
+<div class="nav-form">
+  <%= render 'days/display', locals: {day: @day} %>
+  <a href="/days/<%= @day.id %>/next" class="btn navbar-btn day-select" role="button"><span class="glyphicon glyphicon-arrow-right"></span></a>
+  <a href="/days/today" class="btn navbar-btn day-select" role="button">Go To Today</a>
+</div>
