@@ -7,10 +7,14 @@
   </div>
   <!-- /.row -->
   <div class="row">
-    <div class="col-lg-12">
+    <% if @winners.empty? %>
+        <div class="col-lg-12">
+    <% else %>
+        <div class="col-lg-8">
+    <% end %>
       <div class="panel panel-default">
         <div class="panel-heading">
-          Suggestions
+          Current Suggestions
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
@@ -19,7 +23,7 @@
               <thead>
                 <tr>
                   <th>Place</th>
-                  <th>Time</th>
+                  <th>Departure Time</th>
                   <th>Votes</th>
                 </tr>
               </thead>
@@ -29,21 +33,20 @@
                     <td><%= suggestion.location %></td>
                     <td><%= suggestion.departure_time %></td>
                     <td>
-
-                        <a class="popoverData btn" href="#" data-template='<div class="popover" role="tooltip"><h3 class="popover-title"></h3>
+                        <a class="popoverData btn votes" href="#" data-template='<div class="popover" role="tooltip"><h3 class="popover-title"></h3>
                         <div class="popover-content"></div></div>' style="white-space:pre-wrap;" data-html="true" data-content="<% @suggestion_votes[suggestion.id].each do |user| %>
                         <%= "#{user.name} <br>" %><% end %>"  rel="popover" data-placement="right" data-original-title="People That Voted" data-trigger="hover"><%= suggestion.votes %></a>
-                        <% if current_user %>
+                        <% if current_user and @day.date >= @today.date %>
                           <% if @up_votes_for_user.include? suggestion.id %>
                               <%= link_to vote_down_suggestion_path(suggestion), :class => "btn btn-mini btn-warning navbar-right", :title => "Oops" do %>
                                   <i class="glyphicon glyphicon-thumbs-down"></i>
                               <% end %>
-                          <% end %>
+                          <% else %>
                           <%= link_to vote_up_suggestion_path(suggestion), :class => "btn btn-mini btn-primary navbar-right", :title => "Vote" do %>
                               <i class="glyphicon glyphicon-thumbs-up"></i>
                           <% end %>
-                        <% else %>
                         <% end %>
+                      <% end %>
                     </td>
                   </tr>
                 <% end %>
@@ -53,6 +56,11 @@
         </div>
       </div>
     </div>
+    <% unless @winners.empty? %>
+        <div class="col-lg-4">
+          <%= render 'winners', locals: {winners: @winners} %>
+        </div>
+    <% end %>
   </div>
 </div>
 <script>

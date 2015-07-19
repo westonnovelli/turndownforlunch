@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150718184207) do
     t.string   "departure_time", default: "", null: false
     t.integer  "day_id",         default: 0,  null: false
     t.integer  "votes",          default: 0,  null: false
+    t.integer  "winner",         default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

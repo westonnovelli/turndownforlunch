@@ -3,6 +3,7 @@ class SuggestionsController < ApplicationController
 
     def index
       set_day
+      get_previous_winners
       @suggestions = Suggestion.where("day_id == #{@day.id}")
       @up_votes_for_user = []
       @suggestion_votes = Hash.new {|h, k| h[k] = []}
@@ -89,8 +90,8 @@ class SuggestionsController < ApplicationController
           redirect_to suggestions_url
         }
       end
-
     end
+
 
     private
     def set_suggestion
@@ -102,10 +103,18 @@ class SuggestionsController < ApplicationController
     end
 
     def set_day
+      @today = Day.get_or_create(Date.today)
       if current_user
         @day = current_day
       else
-        @day = Day.get_or_create(Date.today)
+        @day = @today
+      end
+    end
+
+    def get_previous_winners
+      @winners = {}
+      Suggestion.where("winner == ?", 1).each do |winning_suggestion|
+        @winners[winning_suggestion] = Day.find(winning_suggestion.day_id)
       end
     end
 end

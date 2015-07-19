@@ -1,6 +1,6 @@
 <form action="/days/goto" id="goto-day" class="nav-form" >
   <div class="input-append date nav-form">
     <input type="text" class="selected-date" name="goto_day" hidden>
-    <span class="navbar-text add-on current-date" data-date="<%= @day.date.strftime("%Y") %>-<%= @day.date.strftime("%m") %>-<%= @day.date.strftime("%d") %>"><%= @day.date.strftime("%A") %>, <%= @day.date.strftime("%B") %> <%= @day.date.strftime("%e") %></span>
+    <span class="navbar-text add-on current-date" style="width: 132px;" data-date="<%= @day.date.strftime("%Y") %>-<%= @day.date.strftime("%m") %>-<%= @day.date.strftime("%d") %>"><%= render partial: 'days/readable_show', locals: {display_day: @day} %></span>
   </div>
 </form>

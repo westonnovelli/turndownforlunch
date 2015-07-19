@@ -8,15 +8,15 @@
 
   <!-- Text input-->
   <div class="form-group">
-    <%= f.label :location, :class => "col-md-4 control-label" %>
+    <%= f.label :location, :class => "col-md-4 control-label", :required => true %>
     <div class="col-md-5">
-      <%= f.text_field :location, :type => "text", :id => "location", :placeholder => "Enter the name of the place", :class => "form-control input-md" %>
+      <%= f.text_field :location, :type => "text", :id => "location", :placeholder => "Enter the name of the place", :class => "form-control input-md", :required => "true" %>
     </div>
   </div>
 
   <!-- Select Basic -->
   <div class="form-group">
-    <%= f.label :time, :class => "col-md-4 control-label" %>
+    <%= f.label :departure_time, :class => "col-md-4 control-label" %>
     <div class="col-md-5">
       <%= f.select :departure_time, [["12:00 pm", "12:00 pm"],
                                      ["9:00 am", "9:00 am"],

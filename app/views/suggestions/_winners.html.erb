@@ -1,0 +1,8 @@
+<h4>Previous Suggestions</h4>
+<ul>
+  <!--sort_by { |name, age| age }-->
+  <% keys = @winners.keys.sort.reverse %>
+  <% keys.each do |winning_suggestion| %>
+    <li><%= winning_suggestion.location %> | <%= render partial: 'days/readable_show', locals: {display_day: @winners[winning_suggestion]} %></li>
+  <% end %>
+</ul>

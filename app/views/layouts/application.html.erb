@@ -30,17 +30,22 @@
           <li>
             <div>
               <% if current_user %>
-                  <%= link_to 'Add Suggestion', new_suggestion_path, :class =>"btn btn-default navbar-btn" %>
+                  <%= link_to 'Add Suggestion', new_suggestion_path, :class =>"btn btn-default navbar-btn btn-success" %>
               <% else %>
-                  <%= link_to 'Add Suggestion', login_path, :class =>"btn btn-default navbar-btn" %>
+                  <%= link_to 'Add Suggestion', login_path, :class =>"btn btn-default navbar-btn btn-success    " %>
               <% end %>
             </div>
           </li>
+          <% unless @day.nil? %>
+              <% if current_user %>
           <li>
+
             <div class="nav-form">
                 <a href="/days/<%= @day.id %>/prev" class="btn navbar-btn day-select" role="button"><span class="glyphicon glyphicon-arrow-left"></span></a>
             </div>
           </li>
+              <% end %>
+          <% end %>
           <li>
             <div align="center">
               <% unless @day.nil? %>
