@@ -26,3 +26,13 @@
 .nav-form {
     display: inline;
 }
+
+.first-btn {
+    float:left;
+}
+
+@media (max-width: 767px) {
+    .first-btn {
+        float:none;
+    }
+}

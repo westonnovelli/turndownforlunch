@@ -1,7 +1,7 @@
 class Day < ActiveRecord::Base
 
   def prev
-    yesterday = Day.find_by date: self.date.yesterday
+    yesterday = Day.get_or_create(self.date.yesterday)
     if yesterday.nil?
       self
     else
@@ -23,6 +23,7 @@ class Day < ActiveRecord::Base
     if existing_day.nil?
       day = Day.new(date: date)
       day.save
+      DaysController.sync(Date.today)
       day
     else
       existing_day
