@@ -20,4 +20,4 @@ than one suggestion each day.
 2. `RAILS_ENV=production bundle exec rake assets:precompile` compile the assets
 (The production config is set to find assets that it could not find precompiled
   which is different than the default).
-3. `rails server -e production` run the server.
+3. `rails server -e production` run the server

@@ -5,29 +5,49 @@ class DaysController < ApplicationController
     session[:return_to] ||= request.referer
     @day = @day.prev
     session[:day_id] = @day.id
-    redirect_to session.delete(:return_to)
+    referer = session.delete(:return_to)
+    if referer.nil? and referer != request.original_url
+      redirect_to suggestions_url
+    else
+      redirect_to referer
+    end
   end
 
   def next
     session[:return_to] ||= request.referer
     @day = @day.next
     session[:day_id] = @day.id
-    redirect_to session.delete(:return_to)
+    referer = session.delete(:return_to)
+    if referer.nil? and referer != request.original_url
+      redirect_to suggestions_url
+    else
+      redirect_to referer
+    end
   end
 
   def today
     session[:return_to] ||= request.referer
     @day = Day.get_or_create(Date.today)
     session[:day_id] = @day.id
-    sync(@day)
-    redirect_to session.delete(:return_to)
+    DaysController.sync(@day.date)
+    referer = session.delete(:return_to)
+    if referer.nil? and referer != request.original_url
+      redirect_to suggestions_url
+    else
+      redirect_to referer
+    end
   end
 
   def goto
     session[:return_to] ||= request.referer
     @day = Day.get_or_create(Date.parse(params[:goto_day]))
     session[:day_id] = @day.id
-    redirect_to session.delete(:return_to)
+    referer = session.delete(:return_to)
+    if referer.nil? and referer != request.original_url
+      redirect_to suggestions_url
+    else
+      redirect_to referer
+    end
   end
 
   # GET /days
@@ -89,6 +109,41 @@ class DaysController < ApplicationController
     end
   end
 
+  def self.sync(date)
+    logger.info "Syncing db"
+    # removes days older than two weeks ago, and sets the winners of the last 14 days of suggestions
+    # removes suggestions from those days older than two weeks ago too
+    Day.where("date < ?", date).each do |day|
+      if (day.date + 14) < date
+        Day.destroy(day.id)
+      else
+        max = 0
+        leader = []
+        Suggestion.where("day_id == #{day.id}").each do |suggestion|
+          suggestion_day = Day.find(suggestion.day_id)
+          if suggestion_day.nil? or suggestion_day.date < (date - 14)
+            Suggestion.destroy(suggestion.id)
+            continue
+          end
+          if suggestion.winner == 1
+            leader = []
+            break
+          end
+          if suggestion.votes >= max
+            max = suggestion.votes
+            leader << suggestion
+          end
+        end
+        unless leader.empty?
+          leader.each do |suggestion|
+            suggestion.winner = 1
+            suggestion.save
+          end
+        end
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_day
@@ -98,39 +153,5 @@ class DaysController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def day_params
       params.require(:day).permit(:date)
-    end
-
-    def sync(today)
-      # removes days older than two weeks ago, and sets the winners of the last 14 days of suggestions
-      # removes suggestions from those days older than two weeks ago too
-      Day.where("date < ?", today.date).each do |day|
-        if (day.date + 14) < today.date
-          Day.destroy(day.id)
-        else
-          max = 0
-          leader = []
-          Suggestion.where("day_id == #{day.id}").each do |suggestion|
-            suggestion_day = Day.find(suggestion.day_id)
-            if suggestion_day.nil? or suggestion_day.date < (today.date - 14)
-              Suggestion.destroy(suggestion.id)
-              continue
-            end
-            if suggestion.winner == 1
-              leader = []
-              break
-            end
-            if suggestion.votes >= max
-              max = suggestion.votes
-              leader << suggestion
-            end
-          end
-          unless leader.empty?
-            leader.each do |suggestion|
-              suggestion.winner = 1
-              suggestion.save
-            end
-          end
-        end
-      end
     end
 end
